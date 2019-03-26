@@ -23,7 +23,7 @@ public abstract class AbstractRequester<I extends Object, T extends DomainObject
 	public T get(I id) throws HttpException, ParseToObjectException
 	{
 		Response<T> response = DefaultRequestHandler.getInstance().doRequest(HttpMethod.GET, getResourcePath(id));
-		return response.getBodyAsObject(getObjectClass());
+		return (T) response.getBodyAsObject(getObjectClass());
 	}
 
 	public void delete(I id) throws HttpException
