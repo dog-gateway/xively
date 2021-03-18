@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
-import org.codehaus.jackson.map.type.CollectionType;
-import org.codehaus.jackson.map.type.TypeFactory;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.xively.client.http.util.exception.ParseFromObjectException;
 import com.xively.client.http.util.exception.ParseToObjectException;
 import com.xively.client.model.ApiKey;
@@ -163,20 +163,20 @@ public class ParserUtil
 			if (isUpdate && arg.updateRoot != null)
 			{
 				ObjectMapper mapper = getObjectMapper();
-				mapper.configure(SerializationConfig.Feature.WRAP_ROOT_VALUE, true);
-				mapper.getSerializationConfig().withAnnotationIntrospector( new JacksonAnnotationIntrospector());
+				mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
+				mapper.getSerializationConfig().with( new JacksonAnnotationIntrospector());
 				json = mapper.writer().writeValueAsString(models);
 			} else if (!isUpdate && arg.createRoot != null)
 			{
 				ObjectMapper mapper = getObjectMapper();
-				mapper.configure(SerializationConfig.Feature.WRAP_ROOT_VALUE, true);
-				mapper.getSerializationConfig().withAnnotationIntrospector( new JacksonAnnotationIntrospector());
+				mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
+				mapper.getSerializationConfig().with( new JacksonAnnotationIntrospector());
 				json = mapper.writer().writeValueAsString(models);
 			} else
 			{
 				T model = models[0];
 				ObjectMapper mapper = getObjectMapper();
-				mapper.getSerializationConfig().withAnnotationIntrospector( new JacksonAnnotationIntrospector());
+				mapper.getSerializationConfig().with( new JacksonAnnotationIntrospector());
 				json = mapper.writeValueAsString(model);
 			}
 
@@ -260,8 +260,8 @@ public class ParserUtil
 		if (objectMapper == null)
 		{
 			ObjectMapper retval = new ObjectMapper();
-			retval.configure(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-			retval.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			retval.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+			retval.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			//retval.configure(DeserializationConfig.Feature..EAGER_DESERIALIZER_FETCH, false);
 			//retval.configure(SerializationConfig.Feature.EAGER_SERIALIZER_FETCH, false);
 			objectMapper = retval;

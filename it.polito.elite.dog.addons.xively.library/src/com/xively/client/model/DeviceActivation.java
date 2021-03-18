@@ -3,7 +3,7 @@
  */
 package com.xively.client.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author bonino

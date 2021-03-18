@@ -2,10 +2,9 @@
 // This is part of Xively4J library, it is under the BSD 3-Clause license.
 package com.xively.client.model;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonValue;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.xively.client.utils.ObjectUtil;
 
 
